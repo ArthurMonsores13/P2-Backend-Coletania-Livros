@@ -1,0 +1,15 @@
+{% extends "filmes/base.html" %}
+{% block content %}
+<div class="card">
+    <h1>Cadastrar Filme</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<span class="error">{{ field.errors|join:", " }}</span>{% endif %}
+        {% endfor %}
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "filmes/base.html" %}
+{% block content %}
+<div class="card">
+    <h1>Buscar Filme</h1>
+    <form method="get">
+        <input type="text" name="q" value="{{ query }}" placeholder="Nome do filme...">
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+{% if query %}
+    {% if filmes %}
+        {% for filme in filmes %}
+        <div class="card">
+            <a href="{% url 'detalhe' filme.pk %}"><strong>{{ filme.titulo }}</strong></a>
+            {% if filme.ano %} ({{ filme.ano }}){% endif %}
+            — <span class="nota" style="font-size:1em;">{{ filme.nota }}/10</span>
+            {% if filme.genero %}<br><small>{{ filme.genero }}</small>{% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum filme encontrado para "<strong>{{ query }}</strong>".</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
